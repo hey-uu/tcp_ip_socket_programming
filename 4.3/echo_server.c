@@ -41,7 +41,10 @@ int main(int argc, char *argv[])
     // accept -> 연결요청 수락하기
     for (int i = 0; i < QUEUE_SIZE; i++)
     {
-        clnt_sock = accept(serv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+        clnt_addr_size = sizeof(clnt_addr);
+        printf("bef:%u\n", clnt_addr_size);
+        clnt_sock = accept(serv_sock, (struct sockaddr *)&serv_addr, &clnt_addr_size);
+        printf("af:%u\n", clnt_addr_size);
         if (clnt_sock == -1)
             error_handling("accept() error");
         else
